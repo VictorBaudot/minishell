@@ -1,0 +1,12 @@
+*
+!*.c
+!*.h
+!Makefile
+!.gitignore
+!auteur
+!is
+!lst
+!mem
+!put
+!str
+!putf
