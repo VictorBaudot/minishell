@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:39:35 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/28 14:13:02 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/28 14:35:08 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char *read_line(void)
 		exit(EXIT_FAILURE);
 	}
 
-	while (1) {
+	while (42) {
 		c = getchar();
 		if (c == EOF)
 			exit(EXIT_SUCCESS);

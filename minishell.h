@@ -6,15 +6,13 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 15:20:06 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/28 14:08:13 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/28 14:23:58 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define LSH_TOK_BUFSIZE 64
-# define LSH_TOK_DELIM " \t\r\n\a"
 # define LSH_RL_BUFSIZE 1024
 
 # include <sys/wait.h>
@@ -35,7 +33,6 @@ void			init_builtins();
 int				mini_cd(char **args);
 char			*read_line(void);
 int				execute(char **args);
-char			**split_line(char *line);
 int				mini_help(char **args);
 int				launch(char **args);
 void			print_usage(void);

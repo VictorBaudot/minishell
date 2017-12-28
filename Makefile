@@ -6,7 +6,7 @@
 #    By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 08:32:05 by vbaudot           #+#    #+#              #
-#    Updated: 2017/12/28 12:45:39 by vbaudot          ###   ########.fr        #
+#    Updated: 2017/12/28 14:24:01 by vbaudot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ SRC = main.c\
 		cd.c\
 		readline.c\
 		execute.c\
-		split_line.c\
 		help.c\
 		launch.c\
 
