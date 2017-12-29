@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:43:26 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/28 14:42:44 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/29 16:35:36 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		main(int ac, char **av)
 	(void)av;
 	while (status)
 	{
-		ft_putstr("$> ");
+		ft_putstr(">>> ");
 		line = read_line();
 		args = ft_split_whitespaces(line);
 		status = execute(args);

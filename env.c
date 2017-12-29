@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/28 12:40:03 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/29 16:33:50 by vbaudot          ###   ########.fr       */
+/*   Created: 2017/12/29 16:26:47 by vbaudot           #+#    #+#             */
+/*   Updated: 2017/12/29 16:28:22 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int execute(char **args)
+int	mini_setenv(char **args)
 {
-	int i;
-	t_builtins *tab;
+	(void)args;
+	putf("Not done yet.\n");
+	return (1);
+}
 
-	if (!(tab = (t_builtins*)malloc(8 * sizeof(t_builtins))))
-		exit(EXIT_FAILURE);
-	init_builtins(&tab);
-	if (args[0] == NULL)
-		return 1;
-	i = -1;
-	while (tab[++i].str)
-		if (strcmp(args[0], tab[i].str) == 0)
-			return (tab[i].f(args));
-	free(tab);
-	return (launch(args));
+int	mini_unsetenv(char **args)
+{
+	(void)args;
+	putf("Not done yet.\n");
+	return (1);
+}
+
+int	mini_env(char **args)
+{
+	(void)args;
+	putf("Not done yet.\n");
+	return (1);
 }

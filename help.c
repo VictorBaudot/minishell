@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:41:02 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/28 14:41:47 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/29 16:29:46 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int mini_help(char **args)
 	(void)args;
 	putf("Victor Baudot\'s Minishell\nType program names and arguments,");
 	putf("and hit enter.\nThe following are built in:\n");
-	if (!(tab = (t_builtins*)malloc(4 * sizeof(t_builtins))))
+	if (!(tab = (t_builtins*)malloc(8 * sizeof(t_builtins))))
 		exit(EXIT_FAILURE);
 	init_builtins(&tab);
 	if (args[0] == NULL)
