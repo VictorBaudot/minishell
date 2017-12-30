@@ -6,13 +6,13 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:43:26 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/29 16:35:36 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/30 09:48:25 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		main(int ac, char **av)
+int		main(int ac, char **av, char **env)
 {
 	char *line;
 	char **args;
@@ -24,9 +24,10 @@ int		main(int ac, char **av)
 	while (status)
 	{
 		ft_putstr(">>> ");
-		line = read_line();
+		if (get_next_line(1, &line) != 1)
+			exit(EXIT_SUCCESS);
 		args = ft_split_whitespaces(line);
-		status = execute(args);
+		status = execute(args, env);
 		free(line);
 		free(args);
 	}

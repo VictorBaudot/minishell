@@ -6,16 +6,21 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:38:15 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/29 16:29:09 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/30 11:35:56 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int mini_exit(char **args)
+int mini_exit(char **args, char **env)
 {
-	(void)args;
-	return 0;
+	(void)env;
+	if (args[1])
+	{
+		ft_putendl("exit: Too many arguments");
+		return (1);
+	}
+	return (0);
 }
 
 static void	ft_init_tab_fc(t_builtins **tab)
