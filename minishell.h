@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 15:20:06 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/30 09:48:25 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/30 16:15:59 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ int				mini_unsetenv(char **args, char **env);
 int				mini_env(char **args, char **env);
 int				mini_exit(char **args, char **env);
 int				mini_help(char **args, char **env);
+char			*ft_path(char **env, char *path);
+char			*ft_getenv(char **env, char *elem);
 void			init_builtins();
 int				execute(char **args, char **env);
-int				launch(char **args);
+int				launch(char **args, char **env);
 void			print_usage(void);
 void			ft_error(void);
 

@@ -6,7 +6,7 @@
 #    By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 08:32:05 by vbaudot           #+#    #+#              #
-#    Updated: 2017/12/29 16:29:22 by vbaudot          ###   ########.fr        #
+#    Updated: 2017/12/30 14:48:07 by vbaudot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,12 @@ SRC = main.c\
 		print_usage.c\
 		builtins.c\
 		cd.c\
-		readline.c\
 		execute.c\
 		help.c\
 		launch.c\
 		env.c\
 		echo.c\
+		getenv.c\
 
 OBJ = $(SRC:.c=.o)
 DEBUG = #-g3 -fsanitize=address

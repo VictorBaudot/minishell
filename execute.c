@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:40:03 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/30 10:18:04 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/30 15:26:57 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ int execute(char **args, char **envp)
 		if (strcmp(args[0], tab[i].str) == 0)
 			return (tab[i].f(args, envp));
 	free(tab);
-	return (launch(args));
+	return (launch(args, envp));
 }

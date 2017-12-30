@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:26:47 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/30 11:33:28 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/30 15:34:53 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,48 @@ int	mini_setenv(char **args, char **env)
 
 int	mini_unsetenv(char **args, char **env)
 {
-	(void)args;
-	(void)env;
-	putf("Not done yet.\n");
+	int i;
+	int j;
+	char *tmp;
+	char *path;
+
+	if (!args[1] || ft_strcmp(args[1], "") == 0)
+		return (print_env(env));
+	if (args[2])
+	{
+		ft_putendl("setenv: Too many arguments");
+		return (1);
+	}
+	tmp = ft_strdup(ft_getenv(env, args[1]));
+	ft_putendl(tmp);
+	if (ft_strcmp(args[1], "PATH") == 0)
+	{
+		i = -1;
+		while (42)
+		{
+			j = ++i;
+			while (tmp[i])
+			{
+				if (tmp[i] == ':')
+					break ;
+				i++;
+			}
+			if (!tmp[i])
+				break ;
+			path = ft_strsub(tmp, j, (i - j));
+			if (access(path, F_OK) == 0)
+			{
+				putf("%s is OK.\n", path);
+				free(tmp);
+				free(path);
+				return (1);
+			}
+			else
+				putf("%s is NOT OK.\n", path);
+			free(path);
+		}
+	}
+	free(tmp);
 	return (1);
 }
 
