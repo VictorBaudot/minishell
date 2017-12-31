@@ -6,7 +6,7 @@
 #    By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 08:32:05 by vbaudot           #+#    #+#              #
-#    Updated: 2017/12/30 14:48:07 by vbaudot          ###   ########.fr        #
+#    Updated: 2017/12/31 16:19:37 by vbaudot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,10 @@ SRC = main.c\
 		env.c\
 		echo.c\
 		getenv.c\
+		setenv.c\
 
 OBJ = $(SRC:.c=.o)
-DEBUG = #-g3 -fsanitize=address
+DEBUG = -g3 -fsanitize=address
 
 CFLAGS = -Wall -Werror -Wextra
 LIBFT = -L./libft -lft
@@ -40,10 +41,12 @@ BOL="\\033[1m"
 CHE="\\xE2\\x9C\\x94"
 OK="$(GRE)$(CHE)$(NC)"
 
-all: $(NAME)
+all: lli $(NAME)
 
-$(NAME): $(OBJ)
+lli:
 	@make -C libft
+
+$(NAME): ./libft/libft.a $(OBJ)
 	@printf "\n[$(NAME)] linking $(CYA)$(BOL)$(OBJ)$(NC)\n"
 	@printf "to make the binary $(MAG)$(BOL)$(NAME)$(NC)"
 	@gcc $(CFLAGS) $(OBJ) $(LIBFT) $(DEBUG) -o $(NAME)
