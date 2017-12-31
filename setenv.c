@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/31 13:25:54 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/31 17:56:50 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/31 18:11:02 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	mini_setenv(char **args, char ***env)
 		args[2] = "";
 	if (args[3])
 	{
-		ft_putendl("setenv: Too many arguments");
+		ft_putendl("minishell: setenv: too many arguments");
 		return (1);
 	}
 	flag = 0;
@@ -91,7 +91,7 @@ int	mini_unsetenv(char **args, char ***env)
 	}
 	if (args[2])
 	{
-		ft_putendl("unsetenv: Too many arguments");
+		ft_putendl("minishell: unsetenv: too many arguments");
 		return (1);
 	}
 	flag = -1;

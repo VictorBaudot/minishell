@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 15:20:06 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/31 15:23:28 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/31 18:38:31 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # define B_MA  "\x1b[95m"
 # define B_CY "\x1b[96m"
 # define B_WH  "\x1b[97m"
+
+char *g_c_dir;
+char *g_p_dir;
 
 typedef struct	s_builtins
 {

@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:40:22 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/31 16:01:12 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/31 18:06:09 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int launch(char **args, char **env)
 	char *path;
 
 	pid = fork();
-	path = ft_strdup(ft_path(env, args[0]));
+	if (args[0][0] == '.')
+		path = ft_strdup(args[0]);
+	else
+		path = ft_strdup(ft_path(env, args[0]));
 	if (pid == 0)
 	{
 		if (execve(path, &args[0], env) == -1)

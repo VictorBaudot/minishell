@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:41:02 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/31 17:37:33 by vbaudot          ###   ########.fr       */
+/*   Updated: 2017/12/31 18:28:05 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int mini_help(char **args, char **env)
 		return (1);
 	i = -1;
 	while (tab[++i].str)
-		putf("  %s\n", tab[i].str);
-	ft_putendl("  setenv\n  unsetenv\n");
+		putf("->>  %s\n", tab[i].str);
+	ft_putendl("->>  setenv\n->>  unsetenv\n");
 	free(tab);
 	putf("Use the man command for information on other programs.\n");
 	return (1);
