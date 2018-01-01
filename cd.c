@@ -6,26 +6,39 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:41:18 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/31 18:39:04 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/01 15:50:38 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int mini_cd(char **args, char **env)
+static int	is_symlink(const char *path)
 {
+	struct stat	sb;
+
+	lstat(path, &sb);
+	return (((sb.st_mode & S_IFMT) == S_IFLNK) ? 1 : 0);
+}
+
+int mini_cd(char **args, char ***env)
+{
+	char **setenv;
 	char *buf;
+	char *oldpwd;
+	int i;
 
 	if (!args[1])
-		chdir(ft_getenv(env, "HOME"));
+		chdir(ft_getenv(*env, "HOME"));
 	else
 	{
 		if (ft_strcmp(args[1], "-") == 0)
 		{
 			if (!args[2])
 			{
-				if (chdir(g_p_dir) != 0)
-					putf("minishell: dir not found: %s\n", g_p_dir);
+				oldpwd = ft_strdup(ft_getenv(*env, "OLDPWD"));
+				if (chdir(oldpwd) != 0)
+					putf("minishell: dir not found: %s\n", ft_getenv(*env, "OLDPWD"));
+				putf("oldpwd: %s\n", oldpwd);
 			}
 			else
 				ft_putendl("Usage: cd [-|<dir>].");
@@ -34,10 +47,36 @@ int mini_cd(char **args, char **env)
 			putf("minishell: dir not found: %s\n", args[1]);
 	}
 	buf = ft_memalloc(1024);
-	free(g_p_dir);
-	g_p_dir = ft_strdup(g_c_dir);
-	free(g_c_dir);
-	g_c_dir = ft_strdup(getcwd(buf, 1024));
+	if (!(setenv = (char **)malloc(sizeof(char *) * 4)))
+		return (1);
+	setenv[0] = ft_strdup("setenv");
+	setenv[1] = ft_strdup("OLDPWD");setenv[2] = ft_strdup(ft_getenv(*env, "PWD"));
+	ft_putendl(setenv[2]);
+	setenv[3] = 0;
+	mini_setenv(setenv, env);
+	free(setenv[1]);
+	free(setenv[2]);
+	setenv[1] = ft_strdup("PWD");
+	if (is_symlink(args[1]))
+	{
+		ft_putendl("Yep!!");
+		setenv[2] = ft_strdup(args[1]);
+	}
+	else if (ft_strcmp(args[1], "-") == 0 && is_symlink(oldpwd))
+	{
+		setenv[2] = ft_strdup(oldpwd);
+		free(oldpwd);
+	}
+	else
+		setenv[2] = ft_strdup(getcwd(buf, 1024));
+
+	ft_putendl(setenv[2]);
+
+	mini_setenv(setenv, env);
+	i = -1;
+	while (setenv[++i])
+		free(setenv[i]);
+	free(setenv);
 	free(buf);
 	return (1);
 }

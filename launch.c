@@ -6,11 +6,22 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:40:22 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/31 18:06:09 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/01 13:13:14 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int check_slash(char *str)
+{
+	int i;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] == '/')
+			return (1);
+	return (0);
+}
 
 int launch(char **args, char **env)
 {
@@ -19,7 +30,7 @@ int launch(char **args, char **env)
 	char *path;
 
 	pid = fork();
-	if (args[0][0] == '.')
+	if (check_slash(args[0]) == 1)
 		path = ft_strdup(args[0]);
 	else
 		path = ft_strdup(ft_path(env, args[0]));

@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 15:20:06 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/31 18:38:31 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/01 15:05:27 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <sys/wait.h>
 # include <unistd.h>
+# include <sys/stat.h>
 # include <stdlib.h>
 # include <stdio.h> // DELETE
 # include <string.h> // DELETE
@@ -37,9 +38,6 @@
 # define B_CY "\x1b[96m"
 # define B_WH  "\x1b[97m"
 
-char *g_c_dir;
-char *g_p_dir;
-
 typedef struct	s_builtins
 {
 	char		*str;
@@ -48,7 +46,7 @@ typedef struct	s_builtins
 
 int				print_env(char **env);
 int				mini_echo(char **args, char **env);
-int				mini_cd(char **args, char **env);
+int				mini_cd(char **args, char ***env);
 int				mini_setenv(char **args, char ***env);
 int				mini_unsetenv(char **args, char ***env);
 int				mini_env(char **args, char **env);
