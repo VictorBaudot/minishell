@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:26:47 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/01 12:58:00 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/01 16:04:31 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,29 @@ static int	has_equal_sign(char *str, int *x)
 int	mini_env(char **args, char **env)
 {
 	int x;
+	char **c_env;
 	char **setenv;
 
+	x = -1;
+	while (env[++x]){}
+	if (!(c_env = (char **)malloc(sizeof(char *) * (x + 1))))
+		return (1);
+	c_env[x] = 0;
+	x = -1;
+	while (env[++x])
+		c_env[x] = ft_strdup(env[x]);
 	x = 0;
 	if (!args[1])
-		return (print_env(env));
+		return (print_env(c_env));
 	if (ft_strcmp(args[1], "-i") == 0)
 	{
-		if (!(env = (char **)malloc(sizeof(char *))))
+		if (!(c_env = (char **)malloc(sizeof(char *))))
 			return (1);
-		env[0] = 0;
+		c_env[0] = 0;
 		if (args[2])
 		{
 			if (ft_strcmp(args[2], "env") == 0)
-				return (mini_env(&args[2], env));
+				return (mini_env(&args[2], c_env));
 			else if (has_equal_sign(args[2], &x) == 1)
 			{
 				if (!(setenv = (char **)malloc(sizeof(char *) * (4))))
@@ -66,24 +75,24 @@ int	mini_env(char **args, char **env)
 				setenv[0] = ft_strdup("setenv");
 				setenv[1] = ft_strsub(args[2], 0, x);
 				setenv[2] = ft_strsub(args[2], x + 1, ft_strlen(args[2]) - (x + 1));
-				mini_setenv(setenv, &env);
+				mini_setenv(setenv, &c_env);
 				x = -1;
 				while (setenv[++x])
 					free(setenv[x]);
 				free(setenv);
 				if (ft_strcmp(args[3], "env") == 0)
-					return (mini_env(&args[3], env));
+					return (mini_env(&args[3], c_env));
 				else if (args[3])
-					return (launch(&args[3], env));
+					return (launch(&args[3], c_env));
 			}
 			else
-				return (launch(&args[2], env));
+				return (launch(&args[2], c_env));
 		}
 	}
 	else if (args[1])
 	{
 		if (ft_strcmp(args[1], "env") == 0)
-			return (mini_env(&args[1], env));
+			return (mini_env(&args[1], c_env));
 		else if (has_equal_sign(args[1], &x) == 1)
 		{
 			if (!(setenv = (char **)malloc(sizeof(char *) * (4))))
@@ -92,18 +101,22 @@ int	mini_env(char **args, char **env)
 			setenv[0] = ft_strdup("setenv");
 			setenv[1] = ft_strsub(args[1], 0, x);
 			setenv[2] = ft_strsub(args[1], x + 1, ft_strlen(args[1]) - (x + 1));
-			mini_setenv(setenv, &env);
+			mini_setenv(setenv, &c_env);
 			x = -1;
 			while (setenv[++x])
 				free(setenv[x]);
 			free(setenv);
 			if (ft_strcmp(args[2], "env") == 0)
-				return (mini_env(&args[2], env));
+				return (mini_env(&args[2], c_env));
 			else if (args[2])
-				return (launch(&args[2], env));
+				return (launch(&args[2], c_env));
 		}
 		else
-			return (launch(&args[1], env));
+			return (launch(&args[1], c_env));
 	}
+	x = -1;
+	while (env[++x])
+		free(c_env[x]);
+	free(c_env);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:40:22 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/01 13:13:14 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/01 16:12:48 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int launch(char **args, char **env)
 	int status;
 	char *path;
 
+	ft_putendl(args[0]);
 	pid = fork();
 	if (check_slash(args[0]) == 1)
 		path = ft_strdup(args[0]);

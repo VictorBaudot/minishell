@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 15:31:27 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/30 16:18:19 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/01 16:12:47 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ char	*ft_path(char **env, char *cmd)
 	char *path;
 	char *final_path;
 
-
 	tmp = ft_strdup(ft_getenv(env, "PATH"));
 	i = -1;
 	while (42)
@@ -54,8 +53,6 @@ char	*ft_path(char **env, char *cmd)
 				break ;
 			i++;
 		}
-		if (!tmp[i])
-			break ;
 		path = ft_strsub(tmp, j, (i - j));
 		final_path = ft_str3join(ft_strsub(tmp, j, (i - j)), "/", cmd);
 		free(path);
@@ -65,6 +62,8 @@ char	*ft_path(char **env, char *cmd)
 			return (final_path);
 		}
 		free(final_path);
+		if (!tmp[i])
+			break ;
 	}
 	free(tmp);
 	return ("");
