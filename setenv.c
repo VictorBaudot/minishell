@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/31 13:25:54 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/31 18:11:02 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/01 12:51:31 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	mini_setenv(char **args, char ***env)
 			free(tmp[i]);
 		free(tmp);
 	}
-	print_env(*env);
+//	print_env(*env);
 	return (1);
 }
 

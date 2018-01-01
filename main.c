@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:43:26 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/31 18:38:48 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/01 12:52:32 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		main(int ac, char **av, char **env)
 	}
 	else
 		print_usage();
+	ft_putstr(NC);
 	free(g_c_dir);
 	free(g_p_dir);
 	return (0);
