@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:40:22 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/02 09:36:19 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/02 16:20:51 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ int			launch(char **args, char **env)
 	char	*path;
 
 	pid = fork();
-	path = (check_slash(args[0]) == 1) ? ft_strdup(args[0]) :
-	ft_strdup(ft_path(env, args[0]));
 	if (pid == 0)
 	{
-		if (execve(path, &args[0], env) == -1)
-			putf("minishell: command not found: %s\n", args[0]);
+		path = (check_slash(args[0]) == 1) ? ft_strdup(args[0]) :
+		ft_strdup(ft_path(env, args[0]));
+		execve(path, &args[0], env);
 		free(path);
 		exit(EXIT_FAILURE);
 	}
@@ -47,6 +46,5 @@ int			launch(char **args, char **env)
 		while (!WIFEXITED(status) && !WIFSIGNALED(status))
 			waitpid(pid, &status, WUNTRACED);
 	}
-	free(path);
 	return (1);
 }

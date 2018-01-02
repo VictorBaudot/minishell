@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 15:31:27 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/02 11:57:59 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/02 16:21:28 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,13 @@ char		*ft_path(char **env, char *cmd)
 		free(path);
 		if (access(final_path, F_OK) == 0)
 		{
+			if (access(final_path, X_OK) != 0)
+			{
+				putf("minishell: not the rights: %s\n", cmd);
+				free(tmp);
+				exit(EXIT_FAILURE);
+			}
+			putf("minishell: no such file or directory: %s\n", cmd);
 			free(tmp);
 			return (final_path);
 		}
@@ -81,6 +88,7 @@ char		*ft_path(char **env, char *cmd)
 		if (!tmp[i])
 			break ;
 	}
+	putf("minishell: no such file or directory: %s\n", cmd);
 	free(tmp);
 	return ("");
 }

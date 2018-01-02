@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 12:53:19 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/02 12:58:31 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/02 16:57:32 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	check_env(char **args, char ***env, int *i)
 	int		j;
 	int		flag;
 
-	flag = -1;
-	while (flag == -1 && (*env)[*i])
+	flag = -3;
+	while (flag == -3 && (*env)[*i])
 	{
 		j = -1;
 		while (args[1][++j])
