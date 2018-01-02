@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/31 13:25:54 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/01 12:51:31 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/02 10:34:21 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ int	mini_setenv(char **args, char ***env)
 		i++;
 	}
 	if (flag == 1)
-	{
 		(*env)[i - 1] = ft_str3join(args[1], "=", args[2]);
-	}
 	else
 	{
 		if (!(tmp = (char **)malloc(sizeof(char *) * (i + 1))))
@@ -66,7 +64,6 @@ int	mini_setenv(char **args, char ***env)
 			free(tmp[i]);
 		free(tmp);
 	}
-//	print_env(*env);
 	return (1);
 }
 
@@ -111,7 +108,6 @@ int	mini_unsetenv(char **args, char ***env)
 	while ((*env)[++len]){}
 	if (flag == i - 1 && i != 0)
 	{
-//		putf("i:%d len:%d\n", i, len);
 		if (!(tmp = (char **)malloc(sizeof(char *) * (len))))
 			return (1);
 		tmp[len - 1] = 0;
@@ -122,16 +118,13 @@ int	mini_unsetenv(char **args, char ***env)
 			if (j == flag)
 				continue ;
 			tmp[++i] = ft_strdup((*env)[j]);
-			//putf("->tmp:%s\n", tmp[i]);
 		}
-		//putf("i:%d j:%d flag:%d\n", i, j, flag);
 		if (!(*env = (char **)malloc(sizeof(char *) * (len))))
 			return (1);
 		(*env)[len - 1] = 0;
 		i = -1;
 		while (tmp[++i])
 		{
-//			putf("->tmp:%s\n", tmp[i]);
 			(*env)[i] = ft_strdup(tmp[i]);
 		}
 		i = -1;
@@ -139,6 +132,5 @@ int	mini_unsetenv(char **args, char ***env)
 			free(tmp[i]);
 		free(tmp);
 	}
-	print_env(*env);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 15:31:27 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/02 09:50:09 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/02 10:32:54 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char		*ft_getenv(char **env, char *elem)
 {
-	int i;
-	int j;
-	int len;
+	int	i;
+	int	j;
+	int	len;
 
 	i = -1;
 	len = ft_strlen(elem);
