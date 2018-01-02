@@ -6,16 +6,16 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:41:02 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/01 15:05:07 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/02 09:37:20 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int mini_help(char **args, char **env)
+int	mini_help(char **args, char **env)
 {
-	int i;
-	t_builtins *tab;
+	int			i;
+	t_builtins	*tab;
 
 	(void)env;
 	if (args[1])

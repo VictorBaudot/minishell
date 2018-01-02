@@ -6,15 +6,16 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:38:15 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/01 15:04:15 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/02 09:33:45 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int mini_exit(char **args, char **env)
+int			mini_exit(char **args, char **env)
 {
 	(void)env;
+	ft_putendl("exit");
 	if (args[1])
 	{
 		ft_putendl("exit: Too many arguments");

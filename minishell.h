@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 15:20:06 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/01 15:05:27 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/01 17:53:55 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <stdio.h> // DELETE
 # include <string.h> // DELETE
+# include <signal.h>
 # include "libft.h"
 
 # define YEL "\x1b[33m"

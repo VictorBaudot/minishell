@@ -6,16 +6,16 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:40:03 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/01 15:04:39 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/02 09:34:07 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int execute(char **args, char ***envp)
+int	execute(char **args, char ***envp)
 {
-	int i;
-	t_builtins *tab;
+	int			i;
+	t_builtins	*tab;
 
 	if (!(tab = (t_builtins*)malloc(5 * sizeof(t_builtins))))
 		exit(EXIT_FAILURE);

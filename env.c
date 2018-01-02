@@ -6,13 +6,13 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:26:47 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/01 16:04:31 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/02 09:38:58 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int print_env(char **env)
+int			print_env(char **env)
 {
 	int i;
 
@@ -41,7 +41,7 @@ static int	has_equal_sign(char *str, int *x)
 	return (0);
 }
 
-int	mini_env(char **args, char **env)
+int			mini_env(char **args, char **env)
 {
 	int x;
 	char **c_env;

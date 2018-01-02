@@ -6,15 +6,15 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:40:22 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/01 16:12:48 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/02 09:36:19 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int check_slash(char *str)
+static int	check_slash(char *str)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (str[++i])
@@ -23,18 +23,15 @@ static int check_slash(char *str)
 	return (0);
 }
 
-int launch(char **args, char **env)
+int			launch(char **args, char **env)
 {
-	pid_t pid;
-	int status;
-	char *path;
+	pid_t	pid;
+	int		status;
+	char	*path;
 
-	ft_putendl(args[0]);
 	pid = fork();
-	if (check_slash(args[0]) == 1)
-		path = ft_strdup(args[0]);
-	else
-		path = ft_strdup(ft_path(env, args[0]));
+	path = (check_slash(args[0]) == 1) ? ft_strdup(args[0]) :
+	ft_strdup(ft_path(env, args[0]));
 	if (pid == 0)
 	{
 		if (execve(path, &args[0], env) == -1)

@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:38:38 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/12/30 10:17:21 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/02 09:37:38 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	mini_echo(char **args, char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	(void)env;
