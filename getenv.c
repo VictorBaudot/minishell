@@ -6,11 +6,21 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 15:31:27 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/02 10:32:54 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/02 11:57:59 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int			print_env(char **env)
+{
+	int i;
+
+	i = -1;
+	while (env[++i])
+		putf("%s\n", env[i]);
+	return (1);
+}
 
 char		*ft_getenv(char **env, char *elem)
 {

@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:41:18 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/02 11:53:13 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/02 11:54:41 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static int	modify_pwd(char **oldpwd, char ***env, char **args, int i)
 	buf = ft_memalloc(1024);
 	help_norm(*env, &setenv);
 	mini_setenv(setenv, env);
-	ft_putendl(ft_getenv(*env, "OLDPWD"));/////
 	free(setenv[1]);
 	free(setenv[2]);
 	setenv[1] = ft_strdup("PWD");
@@ -52,7 +51,6 @@ static int	modify_pwd(char **oldpwd, char ***env, char **args, int i)
 	else
 		setenv[2] = ft_strdup(getcwd(buf, 1024));
 	mini_setenv(setenv, env);
-	ft_putendl(ft_getenv(*env, "PWD"));
 	while (setenv[++i])
 		free(setenv[i]);
 	free(setenv);

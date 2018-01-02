@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 15:20:06 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/01 17:53:55 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/02 13:10:29 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include <unistd.h>
 # include <sys/stat.h>
 # include <stdlib.h>
-# include <stdio.h> // DELETE
-# include <string.h> // DELETE
 # include <signal.h>
 # include "libft.h"
 
@@ -45,6 +43,8 @@ typedef struct	s_builtins
 	int			(*f)(char **, char **);
 }				t_builtins;
 
+int				too_many_args(char *cmd);
+int				check_env(char **args, char ***env, int *i);
 int				print_env(char **env);
 int				mini_echo(char **args, char **env);
 int				mini_cd(char **args, char ***env);
