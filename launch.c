@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:40:22 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/02 16:20:51 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/20 14:22:14 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int			launch(char **args, char **env)
 		ft_strdup(ft_path(env, args[0]));
 		execve(path, &args[0], env);
 		free(path);
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 	else if (pid < 0)
 		ft_putendl("minishell: fork error\n");

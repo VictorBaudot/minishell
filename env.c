@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:26:47 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/03 15:28:34 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/20 14:22:48 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	help_norm(char ***c_env, char ***setenv, int x, char **args)
 			return (mini_env(&args[i], *c_env));
 		else if (has_equal_sign(args[i], &x) == 1)
 		{
+			putf("yo");
 			if (!(*setenv = (char **)malloc(sizeof(char *) * (4))))
 				return (1);
 			(*setenv)[3] = 0;
@@ -55,7 +56,12 @@ static int	help_norm(char ***c_env, char ***setenv, int x, char **args)
 			free(*setenv);
 		}
 		else
-			launch(&args[i], *c_env);
+		{
+			(*c_env)[0] = "PATH=/bin:/usr/bin";
+			if (launch(&args[i], *c_env) == 0){
+				return (1);
+			}
+		}
 	return (1);
 }
 
@@ -67,9 +73,10 @@ static int	help_norm_2(char ***c_env, char ***setenv, int x, char **args)
 	while ((*c_env)[++i])
 		free((*c_env)[i]);
 	free((*c_env));
-	if (!(*c_env = (char **)malloc(sizeof(char *))))
+	if (!(*c_env = (char **)malloc(sizeof(char *) * 2)))
 		return (1);
 	(*c_env)[0] = 0;
+	(*c_env)[1] = 0;
 	if (args[1])
 		return (help_norm(c_env, setenv, x, &args[1]));
 	return (1);
