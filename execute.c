@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:40:03 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/02 09:34:07 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/03 15:28:48 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,35 @@
 
 int	execute(char **args, char ***envp)
 {
-	int			i;
-	t_builtins	*tab;
+	int		x;
+	char	**envc;
 
-	if (!(tab = (t_builtins*)malloc(5 * sizeof(t_builtins))))
-		exit(EXIT_FAILURE);
-	init_builtins(&tab);
-	if (args[0] == NULL)
+	if (!args[0])
 		return (1);
-	i = -1;
 	if (ft_strcmp(args[0], "setenv") == 0)
 		return (mini_setenv(args, envp));
-	if (ft_strcmp(args[0], "unsetenv") == 0)
+	else if (ft_strcmp(args[0], "unsetenv") == 0)
 		return (mini_unsetenv(args, envp));
-	if (ft_strcmp(args[0], "cd") == 0)
+	else if (ft_strcmp(args[0], "cd") == 0)
 		return (mini_cd(args, envp));
-	while (tab[++i].str)
-		if (ft_strcmp(args[0], tab[i].str) == 0)
-			return (tab[i].f(args, *envp));
-	free(tab);
+	else if (ft_strcmp(args[0], "help") == 0)
+		return (mini_help(args, *envp));
+	else if (ft_strcmp(args[0], "env") == 0)
+	{
+		x = 0;
+		while ((*envp)[x])
+			x++;
+		if (!(envc = (char **)malloc(sizeof(char *) * (x + 1))))
+			return (1);
+		envc[x] = 0;
+		x = -1;
+		while ((*envp)[++x])
+			envc[x] = ft_strdup((*envp)[x]);
+		return (mini_env(args, envc));
+	}
+	else if (ft_strcmp(args[0], "exit") == 0)
+		return (mini_exit(args, *envp));
+	else if (ft_strcmp(args[0], "echo") == 0)
+		return (mini_echo(args, *envp));
 	return (launch(args, *envp));
 }

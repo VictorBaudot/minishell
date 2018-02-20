@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:26:47 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/02 16:58:34 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/03 15:28:34 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static int	help_norm(char ***c_env, char ***setenv, int x, char **args)
 
 	i = 0;
 	while (args[++i])
-	{
 		if (ft_strcmp(args[i], "env") == 0)
 			return (mini_env(&args[i], *c_env));
 		else if (has_equal_sign(args[i], &x) == 1)
@@ -47,7 +46,8 @@ static int	help_norm(char ***c_env, char ***setenv, int x, char **args)
 			(*setenv)[3] = 0;
 			(*setenv)[0] = ft_strdup("setenv");
 			(*setenv)[1] = ft_strsub(args[i], 0, x);
-			(*setenv)[2] = ft_strsub(args[i], x + 1, ft_strlen(args[i]) - (x + 1));
+			(*setenv)[2] = ft_strsub(args[i], x + 1,
+				ft_strlen(args[i]) - (x + 1));
 			mini_setenv(*setenv, c_env);
 			x = -1;
 			while ((*setenv)[++x])
@@ -56,12 +56,17 @@ static int	help_norm(char ***c_env, char ***setenv, int x, char **args)
 		}
 		else
 			launch(&args[i], *c_env);
-	}
 	return (1);
 }
 
 static int	help_norm_2(char ***c_env, char ***setenv, int x, char **args)
 {
+	int	i;
+
+	i = -1;
+	while ((*c_env)[++i])
+		free((*c_env)[i]);
+	free((*c_env));
 	if (!(*c_env = (char **)malloc(sizeof(char *))))
 		return (1);
 	(*c_env)[0] = 0;
@@ -84,10 +89,14 @@ int			mini_env(char **args, char **env)
 	c_env[x] = 0;
 	x = -1;
 	while (env[++x])
+	{
 		c_env[x] = ft_strdup(env[x]);
+		free(env[x]);
+	}
+	free(env);
 	x = 0;
 	if (!args[1])
-		return (print_env(c_env));
+		print_env(c_env);
 	if (ft_strcmp(args[1], "-i") == 0)
 		return (help_norm_2(&c_env, &setenv, x, args));
 	else if (args[1])

@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/31 13:25:54 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/02 16:58:25 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/01/03 14:02:34 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,27 +94,29 @@ int			mini_setenv(char **args, char ***env)
 
 int			mini_unsetenv(char **args, char ***env)
 {
+	int		j;
 	int		i;
 	int		len;
 	int		flag;
 
-	i = 0;
 	if (!args[1])
 		return (print_env(*env));
-	if (ft_strcmp(args[1], "*") == 0)
+	j = 0;
+	while (args[++j])
 	{
-		if (!(*env = (char **)malloc(sizeof(char *))))
+		i = 0;
+		if (ft_strcmp(args[j], "*") == 0)
+		{
+			*env = (char **)malloc(sizeof(char *));
+			(*env)[0] = 0;
 			return (1);
-		(*env)[0] = 0;
-		return (1);
+		}
+		flag = check_env(&args[j - 1], env, &i);
+		len = 0;
+		while ((*env)[len])
+			len++;
+		if (flag == i - 1 && i != 0)
+			var_exist(-1, flag, len, env);
 	}
-	if (args[2])
-		return (too_many_args("unsetenv"));
-	flag = check_env(args, env, &i);
-	len = 0;
-	while ((*env)[len])
-		len++;
-	if (flag == i - 1 && i != 0)
-		return (var_exist(-1, flag, len, env));
 	return (1);
 }
