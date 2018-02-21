@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:26:47 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/20 14:22:48 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/21 15:21:56 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static int	help_norm(char ***c_env, char ***setenv, int x, char **args)
 
 	i = 0;
 	while (args[++i])
+	{
 		if (ft_strcmp(args[i], "env") == 0)
-			return (mini_env(&args[i], *c_env));
+			mini_env(&args[i], *c_env);
 		else if (has_equal_sign(args[i], &x) == 1)
 		{
-			putf("yo");
 			if (!(*setenv = (char **)malloc(sizeof(char *) * (4))))
 				return (1);
 			(*setenv)[3] = 0;
@@ -58,10 +58,13 @@ static int	help_norm(char ***c_env, char ***setenv, int x, char **args)
 		else
 		{
 			(*c_env)[0] = "PATH=/bin:/usr/bin";
-			if (launch(&args[i], *c_env) == 0){
-				return (1);
+			if (launch(&args[i], c_env) == 0){
+				ft_putstr("launch returned 0\n");
+				break ;
 			}
 		}
+	}
+	ft_putstr("\nLeft loop\n");
 	return (1);
 }
 

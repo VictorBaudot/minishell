@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:43:26 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/20 13:40:27 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/21 15:24:27 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,14 @@ int			main(int ac, char **av, char **env)
 			args = ft_split_whitespaces(line);
 			free(line);
 			ft_putstr(NC);
+			putf("Before status: %d\n", status);
 			status = execute(args, &envc);
+			putf("After status: %d\n", status);
 			x = -1;
-			/*while (args[++x])
+			while (args[++x]){
 				free(args[x]);
-			free(args);*/
+			}
+			free(args);
 		}
 	}
 	else

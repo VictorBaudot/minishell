@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 15:20:06 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/03 15:28:43 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/21 12:02:02 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char			*ft_path(char **env, char *path);
 char			*ft_getenv(char **env, char *elem);
 void			init_builtins();
 int				execute(char **args, char ***env);
-int				launch(char **args, char **env);
+int				launch(char **args, char ***env);
 void			print_usage(void);
 void			ft_error(void);
 
