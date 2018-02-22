@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:43:26 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/22 14:10:55 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/22 15:41:39 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,34 @@ static void	handler(int sig)
 	exit(EXIT_SUCCESS);
 }
 
+t_list		*create_env_list(char **env)
+{
+	t_list	*start;
+	t_list	**begin_list;
+	t_list	*new;
+	int		x;
+
+	x = 0;
+	start = ft_lstnew(env[x], ft_strlen(env[x]));
+	begin_list = &start;
+	while (env[++x])
+	{
+		new = ft_lstnew(env[x], ft_strlen(env[x]));
+		ft_lstappend(&start, new);
+		start = start->next;
+
+	}
+	ft_lstprint(begin_list);
+	return (start);
+}
+
 int			main(int ac, char **av, char **env)
 {
 	char	*line;
 	char	**envc;
 	char	**args;
 	int		status;
+	t_list	*start;
 	int		x;
 
 	status = 1;
@@ -32,6 +54,7 @@ int			main(int ac, char **av, char **env)
 	(void)av;
 	signal(SIGINT, handler);
 	x = 0;
+	start = create_env_list(env);
 	while (env[x])
 		x++;
 	if (!(envc = (char **)malloc(sizeof(char *) * (x + 1))))
