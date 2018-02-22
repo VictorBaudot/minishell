@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 15:31:27 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/21 15:15:27 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/22 12:19:21 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,5 @@ char		*ft_path(char **env, char *cmd)
 	}
 	putf("minishell: command not found: %s\n", cmd);
 	free(tmp);
-	return ("");
+	exit(0);
 }

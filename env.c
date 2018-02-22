@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:26:47 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/21 15:21:56 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/22 12:22:40 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,36 +35,30 @@ static int	help_norm(char ***c_env, char ***setenv, int x, char **args)
 {
 	int i;
 
-	i = 0;
-	while (args[++i])
+	i = 1;
+	if (has_equal_sign(args[i], &x) == 1)
 	{
-		if (ft_strcmp(args[i], "env") == 0)
-			mini_env(&args[i], *c_env);
-		else if (has_equal_sign(args[i], &x) == 1)
-		{
-			if (!(*setenv = (char **)malloc(sizeof(char *) * (4))))
-				return (1);
-			(*setenv)[3] = 0;
-			(*setenv)[0] = ft_strdup("setenv");
-			(*setenv)[1] = ft_strsub(args[i], 0, x);
-			(*setenv)[2] = ft_strsub(args[i], x + 1,
-				ft_strlen(args[i]) - (x + 1));
-			mini_setenv(*setenv, c_env);
-			x = -1;
-			while ((*setenv)[++x])
-				free((*setenv)[x]);
-			free(*setenv);
-		}
-		else
-		{
-			(*c_env)[0] = "PATH=/bin:/usr/bin";
-			if (launch(&args[i], c_env) == 0){
-				ft_putstr("launch returned 0\n");
-				break ;
-			}
-		}
+		if (!(*setenv = (char **)malloc(sizeof(char *) * (4))))
+			return (1);
+		(*setenv)[3] = 0;
+		(*setenv)[0] = ft_strdup("setenv");
+		(*setenv)[1] = ft_strsub(args[i], 0, x);
+		(*setenv)[2] = ft_strsub(args[i], x + 1,
+			ft_strlen(args[i]) - (x + 1));
+		mini_setenv(*setenv, c_env);
+		x = -1;
+		while ((*setenv)[++x])
+			free((*setenv)[x]);
+		free(*setenv);
+		(*c_env)[0] = "PATH=/bin:/usr/bin";
+		if (args[++i])
+			execute(&args[i], c_env);
 	}
-	ft_putstr("\nLeft loop\n");
+	else
+	{
+		(*c_env)[0] = "PATH=/bin:/usr/bin";
+		execute(&args[i], c_env);
+	}
 	return (1);
 }
 
