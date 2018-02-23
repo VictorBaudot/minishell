@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:26:47 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/22 12:22:40 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 16:51:20 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,26 @@ static int	has_equal_sign(char *str, int *x)
 
 	i = -1;
 	y = 0;
-	while (str[++i])
-	{
-		if (str[i] == '=')
+	if (str != NULL)
+		while (str[++i])
 		{
-			*x = y;
-			return (1);
+			if (str[i] == '=')
+			{
+				*x = y;
+				return (1);
+			}
+			y++;
 		}
-		y++;
-	}
 	return (0);
 }
 
-static int	help_norm(char ***c_env, char ***setenv, int x, char **args)
+static int	help_norm(t_list **head, char ***setenv, char **args)
 {
 	int i;
+	int x;
 
 	i = 1;
+	x = 0;
 	if (has_equal_sign(args[i], &x) == 1)
 	{
 		if (!(*setenv = (char **)malloc(sizeof(char *) * (4))))
@@ -45,69 +48,45 @@ static int	help_norm(char ***c_env, char ***setenv, int x, char **args)
 		(*setenv)[1] = ft_strsub(args[i], 0, x);
 		(*setenv)[2] = ft_strsub(args[i], x + 1,
 			ft_strlen(args[i]) - (x + 1));
-		mini_setenv(*setenv, c_env);
+		mini_setenv(*setenv, head);
 		x = -1;
 		while ((*setenv)[++x])
 			free((*setenv)[x]);
 		free(*setenv);
-		(*c_env)[0] = "PATH=/bin:/usr/bin";
 		if (args[++i])
-			execute(&args[i], c_env);
+			execute(&args[i], head);
 	}
 	else
 	{
-		(*c_env)[0] = "PATH=/bin:/usr/bin";
-		execute(&args[i], c_env);
+		execute_env(&args[i], head);
 	}
 	return (1);
 }
 
-static int	help_norm_2(char ***c_env, char ***setenv, int x, char **args)
+static int	help_norm_2(t_list **head, char ***setenv, char **args)
 {
-	int	i;
+	t_list	*new;
+	char *str;
 
-	i = -1;
-	while ((*c_env)[++i])
-		free((*c_env)[i]);
-	free((*c_env));
-	if (!(*c_env = (char **)malloc(sizeof(char *) * 2)))
-		return (1);
-	(*c_env)[0] = 0;
-	(*c_env)[1] = 0;
-	if (args[1])
-		return (help_norm(c_env, setenv, x, &args[1]));
+	str = ft_strdup("PATH=/bin:/usr/bin");
+	ft_lsterase(head);
+	new = ft_lstnew(str, ft_strlen(str));
+	if (args[2] != NULL)
+		return (help_norm(&new, setenv, &args[2]));
+	free(str);
+	ft_lstdelthis(&new, "PATH");
 	return (1);
 }
 
-int			mini_env(char **args, char **env)
+int			mini_env(char **args, t_list **head)
 {
-	int		x;
-	char	**c_env;
 	char	**setenv;
 
-	x = 0;
-	while (env[x])
-		x++;
-	if (!(c_env = (char **)malloc(sizeof(char *) * (x + 1))))
-		return (1);
-	c_env[x] = 0;
-	x = -1;
-	while (env[++x])
-	{
-		c_env[x] = ft_strdup(env[x]);
-		free(env[x]);
-	}
-	free(env);
-	x = 0;
 	if (!args[1])
-		print_env(c_env);
+		ft_lstprint(head);
 	if (ft_strcmp(args[1], "-i") == 0)
-		return (help_norm_2(&c_env, &setenv, x, args));
+		return (help_norm_2(head, &setenv, args));
 	else if (args[1])
-		return (help_norm(&c_env, &setenv, x, args));
-	x = -1;
-	while (c_env[++x])
-		free(c_env[x]);
-	free(c_env);
+		return (help_norm(head, &setenv, args));
 	return (1);
 }

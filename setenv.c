@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/31 13:25:54 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 13:44:10 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 17:01:58 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void		ft_lst_add_or_modify(t_list **head, char *name, char *value)
 	if (flag == 0)
 	{
 		str = ft_str3join(name, "=", value);
-		ft_lstappend(head, ft_lstnew(str, ft_strlen(str)));
+		if (*head == NULL)
+			*head = ft_lstnew(str, ft_strlen(str));
+		else
+			ft_lstappend(head, ft_lstnew(str, ft_strlen(str)));
 		free(str);
 	}
 }

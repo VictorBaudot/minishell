@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 15:20:06 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 12:38:44 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 16:23:26 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int				mini_exit(char **args);
 int				mini_help(char **args);
 char			*ft_path(t_list **head, char *path);
 char			*ft_getenv(t_list **head, char *elem);
+int				execute_env(char **args, t_list **head);
 int				execute(char **args, t_list **head);
 int				launch(char **args, t_list **head);
 void			print_usage(void);

@@ -6,16 +6,61 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:40:03 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 13:44:56 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 17:05:25 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	execute(char **args, t_list **head)
+t_list	*ft_lstcopy(t_list **head)
 {
-//	int		x;
-//	char	**envc;
+	t_list	*copy;
+	t_list	*curr_copy;
+	t_list	*tmp;
+	t_list	*curr_head;
+
+	curr_head = *head;
+	if (*head == NULL)
+		return (NULL);
+	curr_copy = ft_lstnew(curr_head->content, curr_head->content_size);
+	copy = curr_copy;
+	curr_head =  curr_head->next;
+	while (curr_head)
+	{
+		tmp = ft_lstnew(curr_head->content, curr_head->content_size);
+		curr_copy->next = tmp;
+		curr_copy = tmp;
+		curr_head = curr_head->next;
+
+	}
+	return (copy);
+}
+
+int		execute_env(char **args, t_list **head)
+{
+	t_list	*copy;
+
+	if (!args[0])
+		return (1);
+	if (ft_strcmp(args[0], "help") == 0)
+		return (mini_help(args));
+	else if (ft_strcmp(args[0], "echo") == 0)
+		return (mini_echo(args));
+	else if (ft_strcmp(args[0], "cd") == 0)
+		return (mini_cd(args, head));
+	else if (ft_strcmp(args[0], "env") == 0)
+	{
+		copy = ft_lstcopy(head);
+		mini_env(args, &copy);
+		ft_lsterase(&copy);
+		return (1);
+	}
+	return (launch(args, head));
+}
+
+int		execute(char **args, t_list **head)
+{
+	t_list	*copy;
 
 	if (!args[0])
 		return (1);
@@ -30,19 +75,13 @@ int	execute(char **args, t_list **head)
 	else if (ft_strcmp(args[0], "setenv") == 0)
 		return (mini_setenv(args, head));
 	else if (ft_strcmp(args[0], "cd") == 0)
-		return (mini_cd(args, head));/*
+		return (mini_cd(args, head));
 	else if (ft_strcmp(args[0], "env") == 0)
 	{
-		x = 0;
-		while ((*envp)[x])
-			x++;
-		if (!(envc = (char **)malloc(sizeof(char *) * (x + 1))))
-			return (0);
-		envc[x] = 0;
-		x = -1;
-		while ((*envp)[++x])
-			envc[x] = ft_strdup((*envp)[x]);
-		return (mini_env(args, envc));
-	}*/
+		copy = ft_lstcopy(head);
+		mini_env(args, &copy);
+		ft_lsterase(&copy);
+		return (1);
+	}
 	return (launch(args, head));
 }

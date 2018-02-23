@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:29:15 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 13:40:41 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 17:13:01 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void		ft_lstdelthis(t_list **head, char *str)
 	int		len;
 
 	curr = *head;
+	prev = curr;
 	len = ft_strlen(str);
 	while (curr)
 	{
@@ -102,8 +103,13 @@ void		ft_lstdelthis(t_list **head, char *str)
 			else
 			{
 				free(curr);
-				prev->next = NULL;
-				curr = prev;
+				if (prev != *head)
+				{
+					prev->next = NULL;
+					curr = prev;
+				}
+				else
+					*head = NULL;
 			}
 		}
 		else {
