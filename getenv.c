@@ -6,40 +6,26 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 15:31:27 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/22 12:19:21 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 12:14:01 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			print_env(char **env)
+char		*ft_getenv(t_list **head, char *elem)
 {
-	int i;
+	t_list	*curr;
+	int		len;
 
-	i = -1;
-	while (env[++i])
-		putf("%s\n", env[i]);
-	return (1);
-}
-
-char		*ft_getenv(char **env, char *elem)
-{
-	int	i;
-	int	j;
-	int	len;
-
-	i = -1;
+	curr = *head;
 	len = ft_strlen(elem);
-	while (env[++i])
+	while (curr)
 	{
-		j = -1;
-		while (elem[++j])
+		if (ft_strncmp(curr->content, elem, len) == 0)
 		{
-			if (env[i][j] != elem[j])
-				break ;
+			return (&(curr->content)[len + 1]);
 		}
-		if (j == len)
-			return (&env[i][j + 1]);
+		curr = curr->next;
 	}
 	return ("");
 }
@@ -56,7 +42,7 @@ static int	check_two_points(char *tmp, int i, int *j)
 	return (i);
 }
 
-char		*ft_path(char **env, char *cmd)
+char		*ft_path(t_list **head, char *cmd)
 {
 	int		i;
 	int		j;
@@ -64,7 +50,7 @@ char		*ft_path(char **env, char *cmd)
 	char	*path;
 	char	*final_path;
 
-	tmp = ft_strdup(ft_getenv(env, "PATH"));
+	tmp = ft_strdup(ft_getenv(head, "PATH"));
 	i = -1;
 	while (42)
 	{

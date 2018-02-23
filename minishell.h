@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 15:20:06 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/21 12:02:02 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 12:38:44 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,25 @@ typedef struct	s_builtins
 	int			(*f)(char **, char **);
 }				t_builtins;
 
+int				list_len(t_list **head);
+void			ft_lsterase(t_list **head);
+t_list			*create_list_from_env(char **env);
+char			**create_env_from_list(t_list **head);
+void			ft_lstdelthis(t_list **head, char *str);
 int				too_many_args(char *cmd);
-int				check_env(char **args, char ***env, int *i);
-int				print_env(char **env);
-int				mini_echo(char **args, char **env);
-int				mini_cd(char **args, char ***env);
-int				mini_setenv(char **args, char ***env);
-int				mini_unsetenv(char **args, char ***env);
-int				mini_env(char **args, char **env);
-int				mini_exit(char **args, char **env);
-int				mini_help(char **args, char **env);
-char			*ft_path(char **env, char *path);
-char			*ft_getenv(char **env, char *elem);
-void			init_builtins();
-int				execute(char **args, char ***env);
-int				launch(char **args, char ***env);
+int				check_env(char **args, t_list **head, int *i);
+int				print_env(t_list **head);
+int				mini_echo(char **args);
+int				mini_cd(char **args, t_list **head);
+int				mini_setenv(char **args, t_list **head);
+int				mini_unsetenv(char **args, t_list **head);
+int				mini_env(char **args, t_list **head);
+int				mini_exit(char **args);
+int				mini_help(char **args);
+char			*ft_path(t_list **head, char *path);
+char			*ft_getenv(t_list **head, char *elem);
+int				execute(char **args, t_list **head);
+int				launch(char **args, t_list **head);
 void			print_usage(void);
 void			ft_error(void);
 

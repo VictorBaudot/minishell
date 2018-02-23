@@ -6,15 +6,14 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:41:02 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/01/03 14:31:13 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 11:55:55 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	mini_help(char **args, char **env)
+int	mini_help(char **args)
 {
-	(void)env;
 	if (args[1])
 	{
 		ft_putendl("help: Too many arguments");

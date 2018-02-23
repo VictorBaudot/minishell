@@ -6,7 +6,7 @@
 #    By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 08:32:05 by vbaudot           #+#    #+#              #
-#    Updated: 2018/02/22 12:37:43 by vbaudot          ###   ########.fr        #
+#    Updated: 2018/02/23 12:47:55 by vbaudot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,16 +14,17 @@ CC = gcc
 NAME = minishell
 SRC = main.c\
 		print_usage.c\
+		echo.c\
+		ft_list.c\
 		builtins.c\
-		cd.c\
 		execute.c\
 		help.c\
-		launch.c\
-		env.c\
-		echo.c\
 		getenv.c\
+		launch.c\
 		setenv.c\
 		utils_env.c\
+		#cd.c\
+		env.c\#
 
 OBJ = $(SRC:.c=.o)
 DEBUG = #-g3 -fsanitize=address

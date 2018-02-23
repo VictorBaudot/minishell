@@ -6,13 +6,13 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/31 13:25:54 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/22 14:48:16 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 12:47:12 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int			var_dont_exist(int i, char **args, char ***env)
+/*
+int			var_dont_exist(int i, char **args, t_list **head)
 {
 	char	**tmp;
 
@@ -41,55 +41,27 @@ int			var_dont_exist(int i, char **args, char ***env)
 		free(tmp[i]);
 	free(tmp);
 	return (1);
-}
+}*/
 
-int			var_exist(int i, int flag, int len, char ***env)
-{
-	char	**tmp;
-	int		j;
-
-	if (!(tmp = (char **)malloc(sizeof(char *) * (len))))
-		return (1);
-	tmp[len - 1] = 0;
-	j = -1;
-	while ((*env)[++j])
-	{
-		if (j == flag)
-			continue ;
-		tmp[++i] = ft_strdup((*env)[j]);
-	}
-	if (!(*env = (char **)malloc(sizeof(char *) * (len))))
-		return (1);
-	(*env)[len - 1] = 0;
-	i = -1;
-	while (tmp[++i])
-		(*env)[i] = ft_strdup(tmp[i]);
-	i = -1;
-	while (tmp[++i])
-		free(tmp[i]);
-	free(tmp);
-	return (1);
-}
-
-int			mini_setenv(char **args, char ***env)
+int			mini_setenv(char **args, t_list **head)
 {
 	int		i;
-	int		flag;
+//	int		flag;
 
 	i = -1;
 	if (!args[1])
-		return (print_env(*env));
+		ft_lstprint(head);
 	else
 	{
 		while (args[1][++i])
 			if (args[1][i] == '=')
 			{
-				ft_putendl("minishell: setenv: Variable name is not valid.");
+				ft_putendl("minishell: setenv: variable name is not valid.");
 				return (1);
 			}
 		if (args[3])
 			return (too_many_args("setenv"));
-		i = 0;
+		i = 0;/*
 		flag = check_env(args, env, &i);
 		//putf("flag=%d i-1=%d\n", flag, i - 1);
 		if (flag == i - 1 && args[2])
@@ -97,36 +69,26 @@ int			mini_setenv(char **args, char ***env)
 		else if (flag == i - 1)
 			(*env)[i - 1] = ft_str3join(args[1], "=", "");
 		else
-			return (var_dont_exist(i, args, env));
+			return (var_dont_exist(i, args, env));*/
 	}
 	return (1);
 }
 
-int			mini_unsetenv(char **args, char ***env)
+int			mini_unsetenv(char **args, t_list **head)
 {
 	int		j;
-	int		i;
-	int		len;
-	int		flag;
 
 	if (!args[1])
-		return (print_env(*env));
+		ft_lstprint(head);
 	j = 0;
 	while (args[++j])
 	{
-		i = 0;
 		if (ft_strcmp(args[j], "*") == 0)
 		{
-			*env = (char **)malloc(sizeof(char *));
-			(*env)[0] = 0;
+			ft_lsterase(head);
 			return (1);
 		}
-		flag = check_env(&args[j - 1], env, &i);
-		len = 0;
-		while ((*env)[len])
-			len++;
-		if (flag == i - 1 && i != 0)
-			var_exist(-1, flag, len, env);
+		ft_lstdelthis(head, args[j]);
 	}
 	return (1);
 }

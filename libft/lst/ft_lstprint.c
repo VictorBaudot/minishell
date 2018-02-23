@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstprint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbaudot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 12:03:40 by vbaudot           #+#    #+#             */
-/*   Updated: 2017/11/15 10:38:39 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 11:49:56 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void	ft_lstprint(t_list **lst)
+void	ft_lstprint(t_list **head)
 {
-	while (*lst)
+	t_list	*curr;
+
+	curr = *head;
+	while (curr)
 	{
-		if ((*lst)->content)
-			ft_putendl((*lst)->content);
-		*lst = (*lst)->next;
+		if (curr->content)
+			ft_putendl(curr->content);
+		curr = curr->next;
 	}
 }
