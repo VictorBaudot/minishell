@@ -6,47 +6,42 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/31 13:25:54 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 12:47:12 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 13:44:10 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-int			var_dont_exist(int i, char **args, t_list **head)
-{
-	char	**tmp;
 
-	if (!(tmp = (char **)malloc(sizeof(char *) * (i + 1))))
-		return (1);
-	tmp[i] = 0;
-	i = -1;
-	while ((*env)[++i]){
-		ft_putstr((*env)[i]);
-		ft_putstr("\n");
-		tmp[i] = ft_strdup((*env)[i]);
+void		ft_lst_add_or_modify(t_list **head, char *name, char *value)
+{
+	t_list	*curr;
+	int		len;
+	int		flag;
+	char	*str;
+
+	curr = *head;
+	len = ft_strlen(name);
+	flag = 0;
+	while (curr) {
+		if (ft_strncmp(curr->content, name, len) == 0 && ((char *)curr->content)[len] == '=')
+		{
+			free(curr->content);
+			curr->content = ft_str3join(name, "=", value);
+			flag = 1;
+		}
+		curr = curr->next;
 	}
-	if (!(*env = (char **)malloc(sizeof(char *) * (i + 2))))
-		return (1);
-	(*env)[i + 1] = 0;
-	if (args[2])
-		(*env)[i] = ft_str3join(args[1], "=", args[2]);
-	else
-		(*env)[i] = ft_str3join(args[1], "=", "");
-	i = -1;
-	while (tmp[++i]){
-		(*env)[i] = ft_strdup(tmp[i]);
+	if (flag == 0)
+	{
+		str = ft_str3join(name, "=", value);
+		ft_lstappend(head, ft_lstnew(str, ft_strlen(str)));
+		free(str);
 	}
-	i = -1;
-	while (tmp[++i])
-		free(tmp[i]);
-	free(tmp);
-	return (1);
-}*/
+}
 
 int			mini_setenv(char **args, t_list **head)
 {
 	int		i;
-//	int		flag;
 
 	i = -1;
 	if (!args[1])
@@ -59,17 +54,13 @@ int			mini_setenv(char **args, t_list **head)
 				ft_putendl("minishell: setenv: variable name is not valid.");
 				return (1);
 			}
-		if (args[3])
+		if (args[2] != NULL && args[3] != NULL)
 			return (too_many_args("setenv"));
-		i = 0;/*
-		flag = check_env(args, env, &i);
-		//putf("flag=%d i-1=%d\n", flag, i - 1);
-		if (flag == i - 1 && args[2])
-			(*env)[i - 1] = ft_str3join(args[1], "=", args[2]);
-		else if (flag == i - 1)
-			(*env)[i - 1] = ft_str3join(args[1], "=", "");
+		i = 0;
+		if (args[2] != NULL)
+			ft_lst_add_or_modify(head, args[1], args[2]);
 		else
-			return (var_dont_exist(i, args, env));*/
+			ft_lst_add_or_modify(head, args[1], "");
 	}
 	return (1);
 }

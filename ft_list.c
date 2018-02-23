@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:29:15 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 12:31:05 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 13:40:41 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,28 @@ void		ft_lstdelthis(t_list **head, char *str)
 {
 	t_list *prev;
 	t_list *curr;
+	int		len;
 
 	curr = *head;
+	len = ft_strlen(str);
 	while (curr)
 	{
-		if (ft_strncmp(curr->content, str, ft_strlen(str)) == 0)
+		if (ft_strncmp(curr->content, str, len) == 0 && ((char *)curr->content)[len] == '=')
 		{
 			free(curr->content);
-			prev->next = curr->next;
-			free(curr);
-			prev = prev->next;
-			curr = prev->next;
+			if (curr->next)
+			{
+				prev->next = curr->next;
+				free(curr);
+				prev = prev->next;
+				curr = prev->next;
+			}
+			else
+			{
+				free(curr);
+				prev->next = NULL;
+				curr = prev;
+			}
 		}
 		else {
 			prev = curr;
