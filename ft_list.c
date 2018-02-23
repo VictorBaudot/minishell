@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:29:15 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 17:13:01 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 17:35:46 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,15 @@ int			list_len(t_list **head)
 	t_list	*curr;
 	int		len;
 
-	curr = *head;
 	len = 1;
-	while (curr)
+	if (*head != NULL)
 	{
-		len++;
-		curr = curr->next;
+		curr = *head;
+		while (curr)
+		{
+			len++;
+			curr = curr->next;
+		}
 	}
 	return (len);
 }
@@ -68,12 +71,15 @@ char		**create_env_from_list(t_list **head)
 	int		i;
 
 	i = 0;
-	curr = *head;
 	env = (char **)malloc(sizeof(char *) * list_len(head));
-	while (curr)
+	if (*head != NULL)
 	{
-		env[i++] = ft_strdup(curr->content);
-		curr = curr->next;
+		curr = *head;
+		while (curr)
+		{
+			env[i++] = ft_strdup(curr->content);
+			curr = curr->next;
+		}
 	}
 	env[i] = NULL;
 	return (env);

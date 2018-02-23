@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:26:47 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 16:51:20 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 17:31:35 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,17 @@ static int	help_norm(t_list **head, char ***setenv, char **args)
 			execute(&args[i], head);
 	}
 	else
-	{
 		execute_env(&args[i], head);
-	}
 	return (1);
 }
 
 static int	help_norm_2(t_list **head, char ***setenv, char **args)
 {
-	t_list	*new;
-	char *str;
 
-	str = ft_strdup("PATH=/bin:/usr/bin");
 	ft_lsterase(head);
-	new = ft_lstnew(str, ft_strlen(str));
+	*head = NULL;
 	if (args[2] != NULL)
-		return (help_norm(&new, setenv, &args[2]));
-	free(str);
-	ft_lstdelthis(&new, "PATH");
+		return (help_norm(head, setenv, &args[1]));
 	return (1);
 }
 

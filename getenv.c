@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 15:31:27 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 12:14:01 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/23 17:39:17 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ char		*ft_path(t_list **head, char *cmd)
 	char	*path;
 	char	*final_path;
 
-	tmp = ft_strdup(ft_getenv(head, "PATH"));
+	if (*head == NULL)
+		tmp = ft_strdup("/bin:/usr/bin");
+	else
+		tmp = ft_strdup(ft_getenv(head, "PATH"));
 	i = -1;
 	while (42)
 	{
