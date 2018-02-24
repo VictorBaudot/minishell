@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:40:03 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 17:05:25 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/24 09:03:30 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,13 @@ t_list	*ft_lstcopy(t_list **head)
 		return (NULL);
 	curr_copy = ft_lstnew(curr_head->content, curr_head->content_size);
 	copy = curr_copy;
-	curr_head =  curr_head->next;
+	curr_head = curr_head->next;
 	while (curr_head)
 	{
 		tmp = ft_lstnew(curr_head->content, curr_head->content_size);
 		curr_copy->next = tmp;
 		curr_copy = tmp;
 		curr_head = curr_head->next;
-
 	}
 	return (copy);
 }

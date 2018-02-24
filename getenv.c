@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 15:31:27 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/24 08:21:46 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/24 09:57:35 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,14 @@ static int	check_two_points(char *tmp, int i, int *j)
 	return (i);
 }
 
-char		*ft_path(t_list **head, char *cmd)
+char		*access_bin(int t[2], char *cmd, char *tmp, char *path)
 {
-	int		i;
-	int		j;
-	char	*tmp;
-	char	*path;
 	char	*final_path;
 
-	if (*head == NULL)
-		tmp = ft_strdup("/bin:/usr/bin");
-	else
-		tmp = ft_strdup(ft_getenv(head, "PATH"));
-	i = -1;
 	while (42)
 	{
-		i = check_two_points(tmp, i, &j);
-		path = ft_strsub(tmp, j, (i - j));
+		t[0] = check_two_points(tmp, t[0], &t[1]);
+		path = ft_strsub(tmp, t[1], (t[0] - t[1]));
 		final_path = ft_str3join(path, "/", cmd);
 		free(path);
 		if (access(final_path, F_OK) == 0)
@@ -72,10 +63,31 @@ char		*ft_path(t_list **head, char *cmd)
 			return (final_path);
 		}
 		free(final_path);
-		if (!tmp[i])
+		if (!tmp[t[0]])
 			break ;
 	}
+	return (NULL);
+}
+
+char		*ft_path(t_list **head, char *cmd)
+{
+	char	*tmp;
+	char	*path;
+	char	*rep;
+	int		t[2];
+
+	t[0] = -1;
+	t[1] = 0;
+	path = NULL;
+	if (*head == NULL)
+		tmp = ft_strdup("/bin:/usr/bin");
+	else
+		tmp = ft_strdup(ft_getenv(head, "PATH"));
+	rep = ft_strdup(access_bin(t, cmd, tmp, path));
+	if (rep != NULL)
+		return (rep);
 	putf("minishell: command not found: %s\n", cmd);
 	free(tmp);
+	free(rep);
 	exit(0);
 }

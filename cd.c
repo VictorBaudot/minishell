@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:41:18 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/24 09:00:22 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/24 09:04:39 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int			mini_cd(char **args, t_list **head)
 	else
 	{
 		if (ft_strcmp(args[1], "-") == 0)
-		{
 			if (!args[2])
 			{
 				oldpwd = ft_strdup(ft_getenv(head, "OLDPWD"));
@@ -80,7 +79,6 @@ int			mini_cd(char **args, t_list **head)
 			}
 			else
 				ft_putendl("Usage: cd [-|<dir>].");
-		}
 		else if (chdir(args[1]) != 0)
 			putf("minishell: dir not found / not the rights: %s\n", args[1]);
 	}

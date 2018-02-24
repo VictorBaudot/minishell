@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:26:47 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/24 08:26:12 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/24 09:02:50 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static int	help_norm(t_list **head, char ***setenv, char **args)
 
 static int	help_norm_2(t_list **head, char ***setenv, char **args)
 {
-
 	ft_lsterase(head);
 	*head = NULL;
 	if (args[2] != NULL)

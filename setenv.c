@@ -6,24 +6,23 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/31 13:25:54 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 17:01:58 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/24 09:15:17 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		ft_lst_add_or_modify(t_list **head, char *name, char *value)
+void		ft_lst_add_or_modify(int flag, t_list **head,
+	char *name, char *value)
 {
 	t_list	*curr;
-	int		len;
-	int		flag;
 	char	*str;
 
 	curr = *head;
-	len = ft_strlen(name);
-	flag = 0;
-	while (curr) {
-		if (ft_strncmp(curr->content, name, len) == 0 && ((char *)curr->content)[len] == '=')
+	while (curr)
+	{
+		if (ft_strncmp(curr->content, name, ft_strlen(name)) == 0 &&
+		((char *)curr->content)[ft_strlen(name)] == '=')
 		{
 			free(curr->content);
 			curr->content = ft_str3join(name, "=", value);
@@ -61,9 +60,9 @@ int			mini_setenv(char **args, t_list **head)
 			return (too_many_args("setenv"));
 		i = 0;
 		if (args[2] != NULL)
-			ft_lst_add_or_modify(head, args[1], args[2]);
+			ft_lst_add_or_modify(0, head, args[1], args[2]);
 		else
-			ft_lst_add_or_modify(head, args[1], "");
+			ft_lst_add_or_modify(0, head, args[1], "");
 	}
 	return (1);
 }

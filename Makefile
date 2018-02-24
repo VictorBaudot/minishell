@@ -6,7 +6,7 @@
 #    By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 08:32:05 by vbaudot           #+#    #+#              #
-#    Updated: 2018/02/23 15:17:52 by vbaudot          ###   ########.fr        #
+#    Updated: 2018/02/24 09:24:04 by vbaudot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC = main.c\
 		utils_env.c\
 		cd.c\
 		env.c\
+		ft_list_del.c\
 
 OBJ = $(SRC:.c=.o)
 DEBUG = #-g3 -fsanitize=address
