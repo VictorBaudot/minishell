@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 15:31:27 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 17:39:17 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/24 08:21:46 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ char		*ft_getenv(t_list **head, char *elem)
 	while (curr)
 	{
 		if (ft_strncmp(curr->content, elem, len) == 0)
-		{
 			return (&(curr->content)[len + 1]);
-		}
 		curr = curr->next;
 	}
 	return ("");
@@ -70,7 +68,6 @@ char		*ft_path(t_list **head, char *cmd)
 				free(final_path);
 				exit(EXIT_FAILURE);
 			}
-			//putf("minishell: no such file or directory: %s\n", cmd);
 			free(tmp);
 			return (final_path);
 		}

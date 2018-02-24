@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:41:18 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 14:47:34 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/24 09:00:22 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@ static void	help_norm(t_list **head, char ***setenv)
 	(*setenv)[3] = 0;
 }
 
-static int	modify_pwd(t_list **head, char **args, int i)
+static int	modify_pwd(t_list **head, char **args, int i, char *oldpwd)
 {
 	char	**setenv;
 	char	*buf;
-	char	*oldpwd;
 
 	buf = ft_memalloc(1024);
 	help_norm(head, &setenv);
@@ -42,8 +41,7 @@ static int	modify_pwd(t_list **head, char **args, int i)
 	free(setenv[1]);
 	free(setenv[2]);
 	setenv[1] = ft_strdup("PWD");
-	oldpwd = ft_strdup(ft_getenv(head, "OLDPWD"));
-	if (is_symlink(args[1]))
+	if (ft_strcmp(args[1], "-") != 0 && is_symlink(args[1]))
 		setenv[2] = ft_strdup(args[1]);
 	else if (ft_strcmp(args[1], "-") == 0 && is_symlink(oldpwd))
 		setenv[2] = ft_strdup(oldpwd);
@@ -62,6 +60,7 @@ int			mini_cd(char **args, t_list **head)
 {
 	char	*oldpwd;
 
+	oldpwd = NULL;
 	if (!args[1])
 		chdir(ft_getenv(head, "HOME"));
 	else
@@ -78,7 +77,6 @@ int			mini_cd(char **args, t_list **head)
 					free(oldpwd);
 					return (1);
 				}
-				free(oldpwd);
 			}
 			else
 				ft_putendl("Usage: cd [-|<dir>].");
@@ -86,5 +84,5 @@ int			mini_cd(char **args, t_list **head)
 		else if (chdir(args[1]) != 0)
 			putf("minishell: dir not found / not the rights: %s\n", args[1]);
 	}
-	return (modify_pwd(head, args, -1));
+	return (modify_pwd(head, args, -1, oldpwd));
 }

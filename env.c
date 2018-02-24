@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:26:47 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 17:31:35 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/24 08:26:12 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static int	help_norm(t_list **head, char ***setenv, char **args)
 	int i;
 	int x;
 
-	i = 1;
+	i = 0;
 	x = 0;
-	if (has_equal_sign(args[i], &x) == 1)
+	while (has_equal_sign(args[++i], &x) == 1)
 	{
 		if (!(*setenv = (char **)malloc(sizeof(char *) * (4))))
 			return (1);
@@ -53,11 +53,8 @@ static int	help_norm(t_list **head, char ***setenv, char **args)
 		while ((*setenv)[++x])
 			free((*setenv)[x]);
 		free(*setenv);
-		if (args[++i])
-			execute(&args[i], head);
 	}
-	else
-		execute_env(&args[i], head);
+	execute_env(&args[i], head);
 	return (1);
 }
 
