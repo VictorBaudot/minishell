@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:29:15 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/24 09:23:31 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/24 11:26:38 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,21 @@ t_list		*create_list_from_env(char **env)
 	int		x;
 
 	x = 0;
-	tmp = ft_lstnew(env[x], ft_strlen(env[x]));
-	head = tmp;
-	while (env[++x])
+	if (*env != NULL)
 	{
-		tmp2 = ft_lstnew(env[x], ft_strlen(env[x]));
-		tmp->next = tmp2;
-		tmp = tmp2;
+		tmp = ft_lstnew(env[x], ft_strlen(env[x]));
+		head = tmp;
+		while (env[++x])
+		{
+			tmp2 = ft_lstnew(env[x], ft_strlen(env[x]));
+			tmp->next = tmp2;
+			tmp = tmp2;
+		}
+	}
+	else
+	{
+		tmp = ft_lstnew("PATH=bin:/bin/ls", ft_strlen("PATH=bin:/bin/ls"));
+		head = tmp;
 	}
 	return (head);
 }
