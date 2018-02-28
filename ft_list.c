@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:29:15 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/24 11:26:38 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/28 09:25:02 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_list		*create_list_from_env(char **env)
 	}
 	else
 	{
-		tmp = ft_lstnew("PATH=bin:/bin/ls", ft_strlen("PATH=bin:/bin/ls"));
+		tmp = ft_lstnew("PATH=/bin:/usr/bin", ft_strlen("PATH=/bin:/usr/bin"));
 		head = tmp;
 	}
 	return (head);
