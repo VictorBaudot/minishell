@@ -6,19 +6,11 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:41:18 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/28 09:43:22 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/28 13:29:42 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	is_symlink(const char *path)
-{
-	struct stat	sb;
-
-	lstat(path, &sb);
-	return (((sb.st_mode & S_IFMT) == S_IFLNK) ? 1 : 0);
-}
 
 static void	help_norm(t_list **head, char ***setenv)
 {
@@ -27,7 +19,6 @@ static void	help_norm(t_list **head, char ***setenv)
 	(*setenv)[0] = ft_strdup("setenv");
 	(*setenv)[1] = ft_strdup("OLDPWD");
 	(*setenv)[2] = ft_strdup(ft_getenv(head, "PWD"));
-	putf("%s\n", (*setenv)[2]);
 	(*setenv)[3] = 0;
 }
 
@@ -42,9 +33,9 @@ static int	modify_pwd(t_list **head, char **args, int i, char *oldpwd)
 	free(setenv[1]);
 	free(setenv[2]);
 	setenv[1] = ft_strdup("PWD");
-	if (ft_strcmp(args[1], "-") != 0 && is_symlink(args[1]))
+	if (ft_strcmp(args[1], "-") != 0)
 		setenv[2] = ft_strdup(args[1]);
-	else if (ft_strcmp(args[1], "-") == 0 && is_symlink(oldpwd))
+	else if (ft_strcmp(args[1], "-") == 0)
 		setenv[2] = ft_strdup(oldpwd);
 	else
 		setenv[2] = ft_strdup(getcwd(buf, 1024));
@@ -81,7 +72,7 @@ int			mini_cd(char **args, t_list **head)
 			else
 				ft_putendl("Usage: cd [-|<dir>].");
 		else if (chdir(args[1]) != 0)
-			putf("minishell: dir not found / not the rights: %s\n", args[1]);
+			return (ft_problem_dir(args[1]));
 	}
 	return (modify_pwd(head, args, -1, oldpwd));
 }

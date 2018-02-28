@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 15:20:06 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/23 16:23:26 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/28 09:55:04 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct	s_builtins
 	int			(*f)(char **, char **);
 }				t_builtins;
 
+int				ft_problem_dir(char *arg);
 int				list_len(t_list **head);
 void			ft_lsterase(t_list **head);
 t_list			*create_list_from_env(char **env);
