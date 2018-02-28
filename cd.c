@@ -6,7 +6,7 @@
 /*   By: vbaudot <vbaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 12:41:18 by vbaudot           #+#    #+#             */
-/*   Updated: 2018/02/24 09:04:39 by vbaudot          ###   ########.fr       */
+/*   Updated: 2018/02/28 09:43:22 by vbaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	help_norm(t_list **head, char ***setenv)
 	(*setenv)[0] = ft_strdup("setenv");
 	(*setenv)[1] = ft_strdup("OLDPWD");
 	(*setenv)[2] = ft_strdup(ft_getenv(head, "PWD"));
+	putf("%s\n", (*setenv)[2]);
 	(*setenv)[3] = 0;
 }
 
