@@ -11,3 +11,5 @@
 !str
 !putf
 !libft
+!*.pdf
+!README*
